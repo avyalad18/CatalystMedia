@@ -2,8 +2,8 @@ from django.urls import path
 from .views import InventoryView
 
 urlpatterns = [
-    path('getbooks',InventoryView.as_view()),   
-    path('addbook',InventoryView.as_view()),
-    path('updatebook/<int:id>',InventoryView.as_view()),
-    path('deletebook/<int:id>',InventoryView.as_view()),
+    path('getbooks',InventoryView.as_view(),name='getbooks'),   
+    path('addbook',InventoryView.as_view(),name='addbook'),
+    path('updatebook/<int:id>',InventoryView.as_view(),name='updatebook'),
+    path('deletebook/<int:id>',InventoryView.as_view(),name='deletebook'),
 ]
