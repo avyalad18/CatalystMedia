@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "323b40f4-6126-42c6-bf55-8c56b490c79b",
+		"name": "CatalystMedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25339207"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var cookieValue = pm.cookies.get(\"csrftoken\");\r",
+									"if (cookieValue) {\r",
+									"    pm.environment.set(\"csrftoken\", cookieValue);\r",
+									"    console.log(\"yoyo\")\r",
+									"}else{\r",
+									"    pm.environment.unset(\"csrftoken\")\r",
+									"    console.log(\"not found\")\r",
+									"}\r",
+									"\r",
+									"// Parse response body as JSON\r",
+									"var responseBody = pm.response.json();\r",
+									"\r",
+									"// Check if access token exists in the response body\r",
+									"if (responseBody && responseBody.result.access) {\r",
+									"    var accessToken = responseBody.result.access;\r",
+									"    pm.environment.set(\"access_token\", accessToken);\r",
+									"    console.log(\"Access token found in response and set in environment variables.\");\r",
+									"} else {\r",
+									"    pm.environment.unset(\"access_token\");\r",
+									"    console.log(\"Access token not found in response.\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "avinash",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://{{HOST}}:{{PORT}}/accounts/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "avinash",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "avinashlad18@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://{{HOST}}:{{PORT}}/accounts/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "get books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "Token {{access_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://{{HOST}}:{{PORT}}/inventory/getbooks"
+					},
+					"response": []
+				},
+				{
+					"name": "add books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjcwNDgxLCJpYXQiOjE3MTA2NDg4ODEsImp0aSI6IjQ1MTQ4ZWRjZGJlZDRlYzY4ODI0ZTdmZmNmN2FiZWI2IiwidXNlcl9pZCI6Mn0.pMQOZQqF4hd2r5C5KBp0yLPt1VsAy4Zk8MfOkNVnHhY"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://{{HOST}}:{{PORT}}/inventory/addbook"
+					},
+					"response": []
+				},
+				{
+					"name": "upload books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjcwNDgxLCJpYXQiOjE3MTA2NDg4ODEsImp0aSI6IjQ1MTQ4ZWRjZGJlZDRlYzY4ODI0ZTdmZmNmN2FiZWI2IiwidXNlcl9pZCI6Mn0.pMQOZQqF4hd2r5C5KBp0yLPt1VsAy4Zk8MfOkNVnHhY"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://{{HOST}}:{{PORT}}/inventory/addbook"
+					},
+					"response": []
+				},
+				{
+					"name": "update book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjcwNDgxLCJpYXQiOjE3MTA2NDg4ODEsImp0aSI6IjQ1MTQ4ZWRjZGJlZDRlYzY4ODI0ZTdmZmNmN2FiZWI2IiwidXNlcl9pZCI6Mn0.pMQOZQqF4hd2r5C5KBp0yLPt1VsAy4Zk8MfOkNVnHhY"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "b8boMW263CoeDTM9WVa9FecU5RL9XE3J",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "pqr",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://{{HOST}}:{{PORT}}/inventory/updatebook/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjcwNDgxLCJpYXQiOjE3MTA2NDg4ODEsImp0aSI6IjQ1MTQ4ZWRjZGJlZDRlYzY4ODI0ZTdmZmNmN2FiZWI2IiwidXNlcl9pZCI6Mn0.pMQOZQqF4hd2r5C5KBp0yLPt1VsAy4Zk8MfOkNVnHhY"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "b8boMW263CoeDTM9WVa9FecU5RL9XE3J",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "pqr",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://{{HOST}}:{{PORT}}/inventory/deletebook/1"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "8000",
+			"type": "string"
+		}
+	]
+}

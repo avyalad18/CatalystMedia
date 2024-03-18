@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/microapp
+
+
+  db:
+    image: postgres
+    container_name: BookService-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: BookService
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin!@7890
+      
+    ports:
+      - "5433:5432"    
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data

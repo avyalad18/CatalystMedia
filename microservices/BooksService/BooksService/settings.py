@@ -75,12 +75,25 @@ WSGI_APPLICATION = 'BooksService.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME':  'BookService',
+       'USER': 'postgres' ,
+       'PASSWORD': 'Admin!@7890' ,
+       'HOST': '192.168.68.76',
+       'PORT': '5433',
+   }
 }
+
 
 
 # Password validation

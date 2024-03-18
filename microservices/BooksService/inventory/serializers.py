@@ -8,5 +8,3 @@ class BooksSerializer(serializers.ModelSerializer) :
         fields = "__all__"
 
 
-
-

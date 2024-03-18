@@ -6,6 +6,7 @@ from .serializers import BooksSerializer,Books
 import json
 
 
+
 # Create your views here.
 class InventoryView(APIView):
 
@@ -44,6 +45,9 @@ class InventoryView(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()                
                 response["result"] = serializer.data
+                response["httpstatus"] = HTTP_201_CREATED
+                
+                
                 return Response(response,status=response.get("httpstatus"))
         except Exception as e:
             response["status"] = "error"
@@ -69,6 +73,8 @@ class InventoryView(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()         
             response["result"] = serializer.data
+            response["httpstatus"] = HTTP_201_CREATED
+            
             return Response(response,status=response.get("httpstatus"))
         
         except Exception as e:
@@ -76,7 +82,6 @@ class InventoryView(APIView):
             response["httpstatus"] = HTTP_500_INTERNAL_SERVER_ERROR
             response["reason"] = f"{e}"
         return Response(response,status=response.get("httpstatus"))
-
 
     def delete(self,request,id):
         response = {"status": "success", "errorcode": "", "reason": "", "result": "", "httpstatus": HTTP_200_OK}
@@ -91,3 +96,22 @@ class InventoryView(APIView):
             response["httpstatus"] = HTTP_500_INTERNAL_SERVER_ERROR
             response["reason"] = f"{e}"
         return Response(response,status=response.get("httpstatus"))
+  
+  
+class UploadView(APIView):
+    
+    def post(self,request):
+        response = {"status": "success", "errorcode": "", "reason": "", "result": "", "httpstatus": HTTP_200_OK}  
+        try:
+            data = json.loads(request.body)
+            serializer = BooksSerializer(data=data,Many=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()                
+                response["result"] = serializer.data
+                return Response(response,status=response.get("httpstatus"))
+        except Exception as e:
+            response["status"] = "error"
+            response["httpstatus"] = HTTP_500_INTERNAL_SERVER_ERROR
+            response["reason"] = f"{e}"
+        return Response(response,status=response.get("httpstatus"))      
+

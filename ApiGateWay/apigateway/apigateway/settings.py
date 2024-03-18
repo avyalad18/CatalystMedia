@@ -89,8 +89,8 @@ DATABASES = {
        'NAME':  'GateWay',
        'USER': 'postgres' ,
        'PASSWORD':  'Admin!@7890' ,
-       'HOST': 'localhost',
-       'PORT': '5432',
+       'HOST': '192.168.68.76',
+       'PORT': '5434',
    }
 }
 

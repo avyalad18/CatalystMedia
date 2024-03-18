@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import InventoryView
+from .views import InventoryView,UploadView
 
 urlpatterns = [
     path('getbooks', InventoryView.as_view()),  
