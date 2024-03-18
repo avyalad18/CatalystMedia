@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 from datetime import timedelta
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,16 +87,18 @@ WSGI_APPLICATION = 'apigateway.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME':  'GateWay',
-       'USER': 'postgres' ,
-       'PASSWORD':  'Admin!@7890' ,
-       'HOST': '192.168.68.76',
-       'PORT': '5434',
+       'NAME':  os.getenv('DBNAME'),
+       'USER': os.getenv('DBUSER'),
+       'PASSWORD': os.getenv('DBPASS'),
+       'HOST': os.getenv('DBHOST'),
+       'PORT': os.getenv('DBPORT'),
    }
 }
+
 
 
 
