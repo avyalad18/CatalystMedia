@@ -9,6 +9,24 @@ services:
     volumes:
       - .:/microapp
 
+  queue:
+    build: 
+      context: .
+      dockerfile: DockerFile
+    command: 'python consumer.py'
+    depends_on:
+      - db
+
+  rabbitmq:
+    image: rabbitmq:3.9.8-management
+    hostname: 'localhost'
+    command: 'python '
+    ports:
+      - "5673:5672"  # RabbitMQ port
+      - "15673:15672"  # RabbitMQ management UI port
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
   db:
     image: postgres

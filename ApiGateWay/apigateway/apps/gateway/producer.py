@@ -1,6 +1,12 @@
-# import pika,json
-# conn=pika.BlockingConnection(pika.ConnectionParameters(host='192.168.68.76'))
-# channel=conn.channel()
+import pika,json
 
-# def publish(method,body):
-#     channel.basic_publish(exchange='',routing_key='main',body=json.dumps(body))
+
+
+def publish(method, body):
+    RABBITMQ_HOST = 'rabbitmq'
+    RABBITMQ_PORT = 5672
+    conn = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT))
+    channel = conn.channel()
+    channel.queue_declare(queue='main')
+    channel.basic_publish(exchange='', routing_key='main', body=json.dumps(body))
+    conn.close()

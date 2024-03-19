@@ -99,6 +99,16 @@ DATABASES = {
    }
 }
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'GateWay',
+#        'USER': 'postgres',
+#        'PASSWORD': 'Admin!@7890',
+#        'HOST': 'localhost',
+#        'PORT': 5432,
+#    }
+# }
 
 
 

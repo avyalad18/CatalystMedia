@@ -55,7 +55,9 @@ class LoginView(APIView) :
                 return Response(response,status=response['httpstatus'])         
            
         except Exception as e :
-            print(e)
+            response["status"] = "error"
+            response["httpstatus"] = HTTP_500_INTERNAL_SERVER_ERROR
+            response["reason"] = f"SomeThing went wrong!"
 
         return Response(response,status=response['httpstatus'] )
 

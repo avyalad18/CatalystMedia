@@ -7,7 +7,7 @@ import http.client,json
 import pandas as pd
 from urllib.parse import urlencode
 from rest_framework.decorators import api_view
-# from .producer import publish
+from .producer import publish
 
 
 # Create your views here.
@@ -15,7 +15,7 @@ class InventoryView(APIView):
     permission_classes =(IsAuthenticated,)
 
     def __init__(self) :
-        self.__conn =  http.client.HTTPConnection("localhost", port=8001)
+        self.__conn =  http.client.HTTPConnection("192.168.68.76", port=8001)
 
     def get(self,request):       
         query_string = urlencode(request.query_params)
@@ -62,6 +62,7 @@ class UploadView(APIView):
             raise Exception( "Only CSV files are allowed.")
 
         df = pd.read_csv(file_data)
-        # publish('books',df.to_dict('records'))        
+        print(df.to_dict("records"))
+        publish('books',df.to_dict('records'))        
         return Response(response,status=response.get("httpstatus"))
     

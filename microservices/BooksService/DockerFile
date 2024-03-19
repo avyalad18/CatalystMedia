@@ -11,6 +11,7 @@ WORKDIR /microapp
 # Install dependencies
 COPY requirements.txt /microapp/requirements.txt
 RUN pip install -r requirements.txt
+RUN pip install pika
 RUN python manage.py migrate
 # Copy project files
 COPY . /microapp/
